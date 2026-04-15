@@ -1,0 +1,14 @@
+stages:
+  - test
+  - build
+
+test:
+  stage: test
+  script:
+    - npm install
+    - npm run test
+
+build:
+  stage: build
+  script:
+    - docker build -t stock-dashboard .

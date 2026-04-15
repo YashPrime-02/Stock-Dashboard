@@ -1,0 +1,153 @@
+/* 🌌 App Shell */
+.app-shell {
+  display: flex;
+  flex-direction: column;
+  /* min-height: 100vh; */
+  background: #020617;
+  color: #e2e8f0;
+}
+
+/* 🔝 Header */
+.app-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  backdrop-filter: blur(10px);
+  background: rgba(2, 6, 23, 0.7);
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+.header-content {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 14px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Logo */
+.logo {
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  cursor: pointer;
+}
+
+.logo:hover {
+  color: #38bdf8;
+}
+
+/* Tagline */
+.tagline {
+  font-size: 12px;
+  color: #64748b;
+}
+
+/* 📦 Main */
+.app-main {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+/* Container */
+.app-container {
+  width: 100%;
+  max-width: 1100px;
+  padding: 24px 16px;
+}
+
+/* 🔻 Footer */
+.app-footer {
+  border-top: 1px solid rgba(255,255,255,0.05);
+  text-align: center;
+  padding: 14px;
+  font-size: 12px;
+  color: #64748b;
+  background: rgba(2, 6, 23, 0.7);
+}
+
+/* ============================= */
+/* ♿ WCAG ACCESSIBILITY ENHANCEMENTS */
+/* ============================= */
+
+/* 🔹 1. FOCUS STATES (KEYBOARD USERS) */
+:focus-visible {
+  outline: 2px solid #38bdf8;
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+/* Buttons + Inputs explicit focus */
+button:focus-visible,
+input:focus-visible {
+  outline: 2px solid #38bdf8;
+  outline-offset: 2px;
+}
+
+/* 🔹 2. IMPROVE COLOR CONTRAST */
+.label {
+  color: #94a3b8; /* better contrast than #64748b */
+}
+
+.error-text {
+  color: #f87171; /* softer but more readable red */
+}
+
+/* 🔹 3. REDUCE MOTION SUPPORT */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* 🔹 4. SCREEN READER ONLY CLASS */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* 🔹 5. BUTTON ACCESSIBILITY */
+button {
+  font-family: inherit;
+}
+
+/* Ensure clickable areas are big enough */
+.search-btn,
+.error-close {
+  min-height: 36px;
+  min-width: 36px;
+}
+
+/* 🔹 6. INPUT IMPROVEMENTS */
+.search-input {
+  line-height: 1.5;
+}
+
+/* 🔹 7. HOVER = ALSO FOCUS (KEYBOARD USERS) */
+.stat-card:hover,
+.stat-card:focus-visible {
+  transform: translateY(-2px) scale(1.02);
+  background: rgba(51, 65, 85, 0.7);
+}
+
+/* 🔹 8. ERROR CONTAINER ROLE SUPPORT (VISUAL) */
+.error-container {
+  position: relative;
+}
+
+/* 🔹 9. BETTER TAP TARGETS (MOBILE) */
+@media (pointer: coarse) {
+  .search-btn {
+    padding: 14px 20px;
+  }
+}
