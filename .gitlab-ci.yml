@@ -1,0 +1,66 @@
+# 🚀 Define pipeline stages (execution order)
+stages:
+  - test
+  - build
+  - docker
+
+# =========================
+# 🧪 TEST STAGE
+# =========================
+test:
+  image: node:20-alpine
+  stage: test
+
+  script:
+    - echo "Installing dependencies..."
+    - npm ci
+
+    - echo "Running tests..."
+    - npm run test --watchAll=false   # ✅ important for CI
+
+  only:
+    - main
+
+# =========================
+# 🏗 BUILD STAGE
+# =========================
+build:
+  image: node:20-alpine
+  stage: build
+
+  script:
+    - echo "Installing dependencies..."
+    - npm ci
+
+    - echo "Building project..."
+    - npm run build
+
+  artifacts:
+    paths:
+      - dist/   # ✅ build output (optional but good practice)
+
+  only:
+    - main
+
+# =========================
+# 🐳 DOCKER BUILD + PUSH
+# =========================
+docker-build:
+  stage: docker
+  image: docker:latest
+
+  services:
+    - docker:dind
+
+  script:
+    - echo "Logging into Docker Hub..."
+    - docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+
+    - echo "Building Docker image..."
+    - docker build -t $DOCKER_USERNAME/crypto-dashboard .
+
+    - echo "Pushing Docker image..."
+    - docker push $DOCKER_USERNAME/crypto-dashboard
+
+  only:
+    - main
